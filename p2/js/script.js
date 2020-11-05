@@ -20,3 +20,13 @@ first, but right in the new array) 😉
 
 GOOD LUCK 😀
 */
+
+function calcTip (billValue) {
+    let tipRate = 0.1;
+    if (billValue >= 50 && billValue <= 300) {
+        tipRate = 0.15;
+    } else if (billValue > 300) {
+        tipRate = 0.2;
+    }
+    return billValue * tipRate;
+}
