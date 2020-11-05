@@ -22,12 +22,13 @@ GOOD LUCK 😀
 */
 
 function calcTip (billValue) {
-    let tipRate = 0.1;
-    if (billValue >= 50 && billValue <= 300) {
-        tipRate = 0.15;
-    } else if (billValue > 300) {
-        tipRate = 0.2;
-    }
+    // if (billValue >= 50 && billValue <= 300) {
+    //     tipRate = 0.15;
+    // } else if (billValue > 300) {
+    //     tipRate = 0.2;
+    // }
+    let tipRate = 0.1
+    billValue >= 50 && billValue <= 300 ? tipRate = 0.15 : tipRate = 0.2;
     return billValue * tipRate;
 }
 
