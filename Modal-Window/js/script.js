@@ -18,5 +18,10 @@ for (let i = 0; i < btnsShowModal.length; i++) {
     btnsShowModal[i].addEventListener('click', showModal)
 }
 
-btnCloseModal.addEventListener('click', hideModal)
-modalOverlay.addEventListener('click', hideModal)
+btnCloseModal.addEventListener('click', hideModal);
+modalOverlay.addEventListener('click', hideModal);
+document.addEventListener('keydown', function (e) {
+   if (e.key === 'Escape')  {
+       hideModal();
+   }
+});
