@@ -89,3 +89,44 @@ printGoals(...game.scored);
 //7.
 team1 < team2 && console.log('Team 1 is more likely to win');
 team1 > team2 && console.log('Team 2 is more likely to win');
+
+console.log('---PART TWO---');
+
+//2.1.
+const printScorer = function (arr) {
+    for (let i = 0; i < arr.length; i++) {
+        console.log(`"Goal ${i + 1}: ${arr[i]}`);
+    }
+}
+
+printScorer(game.scored);
+
+//2.2.
+const averageOdd = function (obj) {
+    let sum = 0;
+    for (const value of Object.values(obj)) {
+        sum += value;
+    }
+    console.log(`Average odd is: ${sum / (Object.keys(obj).length)}`);
+}
+
+averageOdd(game.odds);
+
+//2.3.
+const printOdds = function (obj) {
+    const arr = Object.entries(obj);
+    for (const [key,value] of arr) {
+            console.log(`Odd of victory ${game[key] ?? 'draw'}: ${value}`);
+    }
+}
+
+printOdds(game.odds);
+
+//2.bonus
+const scorers = {};
+for (const item of game.scored) {
+    let goals = scorers[item] ?? 0;
+    scorers[item] = ++goals;
+}
+
+console.log(scorers);
