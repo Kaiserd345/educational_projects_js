@@ -42,25 +42,32 @@ console.log(gameEvents);
 
 //3
 function findAverageEventTime (map) {
-    // const timeEvents = [...map.keys()];
+    const timeEvents = [...map.keys()];
     // let sum = 0;
     // for (const time of timeEvents) {
     //     sum += Number(time);
     // }
-
-    const average = 90 / [...map.keys()].length;
+    const gameTime = timeEvents.pop();
+    const average = gameTime / timeEvents.length;
     console.log(`An event happened, on average, every ${average} minutes`);
 }
 
 findAverageEventTime(gameEvents);
 
 //4
-// [FIRST HALF] 17: ⚽️ GOAL
-for (const key of [...gameEvents.keys()]) {
-    if (key <= 45) {
-        console.log(`[FIRST HALF] ${key}: ${gameEvents.get(key)}`);
-    } else {
-        console.log(`[SECOND HALF] ${key}: ${gameEvents.get(key)}`);
-    }
+//first solution
+
+// for (const key of [...gameEvents.keys()]) {
+//     if (key <= 45) {
+//         console.log(`[FIRST HALF] ${key}: ${gameEvents.get(key)}`);
+//     } else {
+//         console.log(`[SECOND HALF] ${key}: ${gameEvents.get(key)}`);
+//     }
+// }
+
+//second solution
+for (const [min, event] of gameEvents) {
+    const currentHalf = min <= 45 ? 'FIRST' : 'SECOND';
+    console.log(`[${currentHalf} HALF] ${min}: ${event}`);
 }
 
