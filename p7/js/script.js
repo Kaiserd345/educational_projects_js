@@ -94,9 +94,13 @@ console.log('---PART TWO---');
 
 //2.1.
 const printScorer = function (arr) {
-    for (let i = 0; i < arr.length; i++) {
-        console.log(`"Goal ${i + 1}: ${arr[i]}`);
+    for (const [i, player] of game.scored.entries()) {
+        console.log(`Goal ${i + 1}: ${player}`)
     }
+    //for loop variant
+    // for (let i = 0; i < arr.length; i++) {
+    //     console.log(`Goal ${i + 1}: ${arr[i]}`);
+    // }
 }
 
 printScorer(game.scored);
@@ -114,9 +118,10 @@ averageOdd(game.odds);
 
 //2.3.
 const printOdds = function (obj) {
-    const arr = Object.entries(obj);
-    for (const [key,value] of arr) {
-            console.log(`Odd of victory ${game[key] ?? 'draw'}: ${value}`);
+    const odds = Object.entries(obj);
+    for (const [team, odd] of odds) {
+        const teamName = team === 'x' ? 'draw' : `victory ${game[team]}`
+        console.log(`Odd of ${teamName}: ${odd}`);
     }
 }
 
