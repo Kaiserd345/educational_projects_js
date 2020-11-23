@@ -63,4 +63,5 @@ const poll = {
 
 }
 
-poll.registerNewAnswer();
+document.querySelector('.poll').addEventListener('click', poll.registerNewAnswer.bind(poll));
+
