@@ -46,9 +46,21 @@ const poll = {
     // This generates [0, 0, 0, 0]. More in the next section 😃
     answers: new Array(4).fill(0),
     registerNewAnswer() {
-        const userAnswer = prompt('What is your favourite programming language? \n0: JavaScript\n1: Python\n2: Rust\n3: C++)', '');
-        console.log(userAnswer)
+        let userAnswer = Number(prompt('What is your favourite programming language? \n0: JavaScript\n1: Python\n2: Rust\n3: C++)', ''));
+        //Check input
+        while (userAnswer > this.answers.length - 1 || userAnswer < 0) {
+            alert("Please recheck your answer.");
+            userAnswer = Number(prompt('What is your favourite programming language? \n0: JavaScript\n1: Python\n2: Rust\n3: C++)', `${userAnswer}`));
+        }
+        //Incriase answers array
+        for (let i = 0; i <= this.answers.length - 1; i++) {
+            if (i === userAnswer) this.answers[i] += 1;
+        }
+        console.log(this.answers)
+
     }
+
+
 }
 
 poll.registerNewAnswer();
