@@ -46,17 +46,21 @@ const poll = {
     // This generates [0, 0, 0, 0]. More in the next section 😃
     answers: new Array(4).fill(0),
     registerNewAnswer() {
-        let userAnswer = Number(prompt('What is your favourite programming language? \n0: JavaScript\n1: Python\n2: Rust\n3: C++)', ''));
+        let userAnswer = Number(prompt(`${this.question} \n${this.options.join('\n')}\n(Write option number))`, ''));
         //Check input
         while (userAnswer > this.answers.length - 1 || userAnswer < 0) {
             alert("Please recheck your answer.");
             userAnswer = Number(prompt('What is your favourite programming language? \n0: JavaScript\n1: Python\n2: Rust\n3: C++)', `${userAnswer}`));
         }
         //Incriase answers array
-        for (let i = 0; i <= this.answers.length - 1; i++) {
-            if (i === userAnswer) this.answers[i] += 1;
-        }
+        // for (let i = 0; i <= this.answers.length - 1; i++) {
+        //     if (i === userAnswer) this.answers[i] += 1;
+        // }
+        typeof userAnswer === 'number' && this.answers[userAnswer]++;
         console.log(this.answers)
+
+    },
+    displayResults(type) {
 
     }
 
@@ -64,4 +68,5 @@ const poll = {
 }
 
 document.querySelector('.poll').addEventListener('click', poll.registerNewAnswer.bind(poll));
+poll.displayResults.call()
 
