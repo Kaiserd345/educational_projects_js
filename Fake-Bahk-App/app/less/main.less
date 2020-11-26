@@ -14,7 +14,7 @@ html {
 body {
   font-family: "Poppins", sans-serif;
   color: @text-color-dark;
-  background-color: @main-bg;
+  background-color: @bg-main;
   height: 100vh;
   padding: 2rem;
 
@@ -48,35 +48,36 @@ nav {
     border-radius: .5rem;
     margin-right: 1rem;
     color: inherit;
-    border: 1px solid #fff;
+    border: 1px solid @bg-white;
     transition: all 0.3s;
 
     &:focus {
       outline: none;
-      border: 1px solid #ccc;
+      border: 1px solid @text-color-grey;
     }
 
     &::placeholder {
       color: #bbb;
     }
   }
+
+  &__btn {
+    border: none;
+    background: none;
+    font-size: 2.2rem;
+    color: inherit;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover,
+    &:focus,
+    &:hover,
+    &:focus {
+      outline: none;
+      color: @text-color-grey;
+    }
 }
 
-&__btn {
-  border: none;
-  background: none;
-  font-size: 2.2rem;
-  color: inherit;
-  cursor: pointer;
-  transition: all 0.3s;
-
-  &:hover,
-  &:focus,
-  &:hover,
-  &:focus {
-    outline: none;
-    color: #777;
-  }
 }
 
 /* MAIN */
@@ -119,7 +120,7 @@ nav {
 
   .movements {
     grid-row: 2 / span 3;
-    background-color: #fff;
+    background-color: @bg-white;
     border-radius: 1rem;
     overflow: scroll;
 
@@ -127,14 +128,14 @@ nav {
       padding: 2.25rem 4rem;
       display: flex;
       align-items: center;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid lighten(@text-color-grey, 35%);
     }
 
     &__type {
       font-size: 1.1rem;
       text-transform: uppercase;
       font-weight: 500;
-      color: #fff;
+      color: @text-color-white;
       padding: 0.1rem 1rem;
       border-radius: 10rem;
       margin-right: 2rem;
@@ -246,7 +247,7 @@ nav {
       &__input {
         width: 100%;
         border: none;
-        background-color: @main-bg;
+        background-color: @bg-main;
         font-family: inherit;
         font-size: 1.5rem;
         text-align: center;
@@ -265,14 +266,14 @@ nav {
         border: none;
         border-radius: 0.7rem;
         font-size: 1.8rem;
-        background-color: @main-bg;
+        background-color: @bg-main;
         cursor: pointer;
         transition: all 0.3s;
       }
 
       &__btn:focus {
         outline: none;
-        background-color: fadeout(@main-bg, 50%);
+        background-color: fadeout(@bg-main, 50%);
       }
     }
 
