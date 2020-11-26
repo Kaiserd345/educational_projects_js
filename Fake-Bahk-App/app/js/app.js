@@ -2,31 +2,31 @@
 
 // Data
 const account1 = {
-  owner: 'Dmytro Arkhypov',
-  movements: [500, 450, -300, 6000, -550, -130, 60, 1300],
-  interestRate: 1.2, // %
-  pin: 1111,
+    owner: 'Dmytro Arkhypov',
+    movements: [500, 450, -300, 6000, -550, -130, 60, 1300],
+    interestRate: 1.2, // %
+    pin: 1111,
 };
 
 const account2 = {
-  owner: 'Alexander Brin',
-  movements: [3000, 7400, -150, -790, -4210, -1200, 8500, -30],
-  interestRate: 1.5,
-  pin: 2222,
+    owner: 'Alexander Brin',
+    movements: [3000, 7400, -150, -790, -4210, -1200, 8500, -30],
+    interestRate: 1.5,
+    pin: 2222,
 };
 
 const account3 = {
-  owner: 'Barack Hussein Obama',
-  movements: [200, -200, 340, -300, -20, 50, 400, -460],
-  interestRate: 0.7,
-  pin: 3333,
+    owner: 'Barack Hussein Obama',
+    movements: [200, -200, 340, -300, -20, 50, 400, -460],
+    interestRate: 0.7,
+    pin: 3333,
 };
 
 const account4 = {
-  owner: 'Peter Mulinie',
-  movements: [430, 1000, 700, 50, 90],
-  interestRate: 1,
-  pin: 4444,
+    owner: 'Peter Mulinie',
+    movements: [430, 1000, 700, 50, 90],
+    interestRate: 1,
+    pin: 4444,
 };
 
 const accounts = [account1, account2, account3, account4];
@@ -58,16 +58,28 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 const displayMovements = function (movements) {
-  containerMovements.innerHTML = '';
-  movements.forEach(function (mov, i){
-    const type = mov > 0 ? 'deposit' : 'withdrawal';
-    const html = `
+    containerMovements.innerHTML = '';
+    movements.forEach(function (mov, i) {
+        const type = mov > 0 ? 'deposit' : 'withdrawal';
+        const html = `
         <div class="movements__row">
             <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
             <div class="movements__value">${mov}€</div>
         </div>
     `;
-    containerMovements.insertAdjacentHTML('afterbegin', html);
-  });
+        containerMovements.insertAdjacentHTML('afterbegin', html);
+    });
 }
 displayMovements(account1.movements);
+
+const createUserNames = function (accs) {
+    accs.forEach(acc => {
+        acc.userName = acc.owner
+            .toLowerCase()
+            .split(' ')
+            .map(name => name[0])
+            .join('');
+    })
+};
+
+createUserNames(accounts);
