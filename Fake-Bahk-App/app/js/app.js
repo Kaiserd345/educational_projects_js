@@ -89,7 +89,7 @@ const calcDisplaySummary = function (acc) {
 
     labelSumIn.textContent = `${incomes} €`;
     labelSumOut.textContent = `${Math.abs(out)} €`;
-    labelSumInterest.textContent = `${interest} €`
+    labelSumInterest.textContent = `${interest.toFixed(1)} €`
 }
 
 
