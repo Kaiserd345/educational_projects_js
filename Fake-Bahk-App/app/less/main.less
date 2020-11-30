@@ -21,10 +21,16 @@ body {
 }
 
 nav {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
 }
 
 .welcome {
@@ -32,8 +38,11 @@ nav {
   font-weight: 500;
 }
 
-.logo {
-  height: 5.25rem;
+.hint {
+  position: absolute;
+  top: 3.2rem;
+  left: 2rem;
+  font-size: 1.3rem;
 }
 
 .login {
@@ -76,7 +85,7 @@ nav {
       outline: none;
       color: @text-color-grey;
     }
-}
+  }
 
 }
 
@@ -235,6 +244,7 @@ nav {
       gap: 0.4rem 1rem;
 
       /* Exceptions for interst */
+
       &--loan {
         grid-template-columns: 2.5fr 1fr 2.5fr;
       }
@@ -242,6 +252,7 @@ nav {
       &__label--loan {
         grid-row: 2;
       }
+
       /* End exceptions */
 
       &__input {
