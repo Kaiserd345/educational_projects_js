@@ -153,6 +153,7 @@ btnTransfer.addEventListener('click', function (e) {
         currentAccount.movements.push(-amount);
         receiverAccount.movements.push(amount);
         updateUI(currentAccount);
+        alert(`You just transfer ${amount} to ${receiverAccount.owner}'s account`);
     }
 });
 
@@ -184,6 +185,10 @@ btnClose.addEventListener('click', function (e) {
     inputCloseUsername.value = inputClosePin.value = '';
     //Hide UI
     containerApp.style.opacity = 0;
+    //Welcome label
+    labelWelcome.textContent = "Log in to start:";
+    //Alert
+    alert(`User account ${currentAccount.username} was deleted`);
 });
 
 let sorted = false;
