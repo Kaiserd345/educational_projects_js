@@ -17,6 +17,7 @@ const account1 = {
         '2020-08-01T10:51:36.790Z',
         '2020-08-01T10:53:36.790Z',
     ],
+    local: 'en-GB',
 };
 
 const account2 = {
@@ -34,6 +35,7 @@ const account2 = {
         '2020-06-25T18:49:59.371Z',
         '2020-07-26T12:01:20.894Z',
     ],
+    local: 'ru-RU',
 };
 
 const accounts = [account1, account2];
@@ -66,17 +68,18 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 //Functions
 
-const formatMovementDate = function (date) {
+const formatMovementDate = function (date, locale) {
     const calcDaysPassed = (date1, date2) => Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
     const daysPassed = calcDaysPassed(new Date(), date);
     if (daysPassed === 0) return 'today';
     if (daysPassed === 1) return 'yesterday';
     if (daysPassed <= 7) return `${daysPassed} days ago`;
     else {
-        const day = `${date.getDate()}`.padStart(2, 0);
-        const month = `${date.getMonth() + 1}`.padStart(2, 0);
-        const year = date.getFullYear();
-        return `${day}/${month}/${year}`;
+        // const day = `${date.getDate()}`.padStart(2, 0);
+        // const month = `${date.getMonth() + 1}`.padStart(2, 0);
+        // const year = date.getFullYear();
+        // return `${day}/${month}/${year}`;
+        return new Intl.DateTimeFormat(locale).format(date);
     }
 }
 
@@ -91,7 +94,7 @@ const displayMovements = function (acc, sort = false) {
         const type = mov > 0 ? 'deposit' : 'withdrawal';
 
         const date = new Date(acc.movementsDates[i]);
-        const displayDate = formatMovementDate(date);
+        const displayDate = formatMovementDate(date, acc.local);
 
         const html = `
         <div class="movements__row">
@@ -158,18 +161,32 @@ btnLogin.addEventListener('click', function (e) {
 
     currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
     if (currentAccount && currentAccount.password === Number(inputLoginPassword.value)) {
+
         //Display UI and message
         labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`;
         containerApp.style.opacity = 100;
+
         //Create Current Date
         const now = new Date();
-        const day = `${now.getDate()}`.padStart(2, 0);
-        const month = `${now.getMonth() + 1}`.padStart(2, 0);
-        const year = now.getFullYear();
-        const hour = `${now.getHours()}`.padStart(2, 0);
-        const min = `${now.getMinutes()}`.padStart(2, 0);
 
-        labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
+        //Using internalization API
+        const options = {
+            hour: 'numeric',
+            minute: 'numeric',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+        };
+        // const day = `${now.getDate()}`.padStart(2, 0);
+        // const month = `${now.getMonth() + 1}`.padStart(2, 0);
+        // const year = now.getFullYear();
+        // const hour = `${now.getHours()}`.padStart(2, 0);
+        // const min = `${now.getMinutes()}`.padStart(2, 0);
+
+        //Display date
+        labelDate.textContent = new Intl.DateTimeFormat(currentAccount.local, options).format(now);
+        // labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
+
         //Clear inputs
         inputLoginUsername.value = inputLoginPassword.value = '';
         //Remove focuses from inputs
@@ -198,9 +215,11 @@ btnTransfer.addEventListener('click', function (e) {
         //Transfer
         currentAccount.movements.push(-amount);
         receiverAccount.movements.push(amount);
+
         //Add transfer Date
         currentAccount.movementsDates.push(new Date().toISOString());
         receiverAccount.movementsDates.push(new Date().toISOString());
+
         //UpdateUI
         updateUI(currentAccount);
         alert(`You just transfer ${amount} to ${receiverAccount.owner}'s account`);
@@ -215,10 +234,13 @@ btnLoan.addEventListener('click', function (e) {
     if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
         //Add movement
         currentAccount.movements.push(amount);
+
         //Add Loan Date
         currentAccount.movementsDates.push(new Date().toISOString());
+
         //UpdateUI
         updateUI(currentAccount);
+
         //Clear input
         inputLoanAmount.value = '';
     } else {
@@ -235,10 +257,13 @@ btnClose.addEventListener('click', function (e) {
     }
     //Clear Inputs
     inputCloseUsername.value = inputClosePin.value = '';
+
     //Hide UI
     containerApp.style.opacity = 0;
+
     //Welcome label
     labelWelcome.textContent = "Log in to start:";
+
     //Alert
     alert(`User account ${currentAccount.username} was deleted`);
 });
