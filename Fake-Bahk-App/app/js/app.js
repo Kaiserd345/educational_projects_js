@@ -73,7 +73,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 const formatCurrency = function (value, local, currency) {
     return new Intl.NumberFormat(local, {
         style: 'currency',
-        currency:  currency,
+        currency: currency,
     }).format(value);
 }
 
@@ -163,14 +163,42 @@ const updateUI = function (acc) {
     calcDisplaySummary(acc);
 }
 
+const startLogOutTimer = function () {
+    const tick = function () {
+        const min = String(Math.trunc(time / 60)).padStart(2, 0);
+        const sec = String(time % 60).padStart(2, 0);
+        //Print time to UI
+        labelTimer.textContent = `${min}:${sec}`;
+        //Check for 0 sec
+        if (time === 0) {
+            clearInterval(timer);
+            //Hide UI and show message
+            labelWelcome.textContent = `Log in to get started`;
+            containerApp.style.opacity = 0;
+            alert('We stop session, cause it\'s longer than 5 min.')
+        }
+        //Decrease 1s
+        time--;
+
+    }
+    //Set timer
+    let time = 300;
+
+    //Call timer every second
+    tick();
+    const timer = setInterval(tick, 1000);
+    return timer;
+}
+
 // Event handler
 
-let currentAccount;
+let currentAccount,
+    timer;
 
 //FAKE LOGIN
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.opacity = 100;
 
 
 btnLogin.addEventListener('click', function (e) {
@@ -206,10 +234,16 @@ btnLogin.addEventListener('click', function (e) {
 
         //Clear inputs
         inputLoginUsername.value = inputLoginPassword.value = '';
+
         //Remove focuses from inputs
         inputLoginPassword.blur();
         inputLoginUsername.blur();
 
+        //Start timer
+        if (timer) clearInterval(timer);
+        timer = startLogOutTimer();
+
+        //Update UI
         updateUI(currentAccount);
     } else {
         alert('User name or password is wrong!');
@@ -240,6 +274,10 @@ btnTransfer.addEventListener('click', function (e) {
         //UpdateUI
         updateUI(currentAccount);
         alert(`You just transfer ${amount} to ${receiverAccount.owner}'s account`);
+
+        //Reset timer
+        clearInterval(timer);
+        startLogOutTimer();
     }
 });
 
@@ -260,6 +298,10 @@ btnLoan.addEventListener('click', function (e) {
 
         //Clear input
         inputLoanAmount.value = '';
+
+        //Reset timer
+        clearInterval(timer);
+        startLogOutTimer();
     } else {
         alert("Amount is too big");
     }
