@@ -1,5 +1,5 @@
 @import "imports/_var.less";
-@import "imports/_media.less";
+
 
 * {
   margin: 0;
@@ -39,15 +39,30 @@ nav {
   font-weight: 500;
 }
 
-.hint {
-  position: absolute;
-  top: 3.2rem;
-  left: 2rem;
-  font-size: 1.3rem;
-}
-
 .login {
   display: flex;
+
+  .hint {
+    position: relative;
+    font-size: 2rem;
+    padding-right: 1rem;
+    line-height: 3rem;
+    top: .3rem;
+
+    &:hover {
+      text-decoration: underline;
+      color: @red-accent;
+      cursor: pointer;
+    }
+
+    &--data {
+      position: absolute;
+      display: none;
+      top: 3.2rem;
+      left: 2rem;
+      font-size: 1.3rem;
+    }
+  }
 
   &__input {
     padding: 0.5rem 2rem;
@@ -308,4 +323,5 @@ nav {
 
 }
 
+@import "imports/_media.less";
 

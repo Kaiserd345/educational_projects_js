@@ -18,12 +18,15 @@
 <!-- TOP NAVIGATION -->
 <nav>
     <p class="welcome">Log in to start:</p>
-    <div class="hint">
-        <p>User: da Pass: 1111</p>
-        <p>User: ab Pass: 2222</p>
-    </div>
     <h1>fakeBankApp</h1>
     <form class="login">
+        <div class="hint">
+            ?
+            <div class="hint--data">
+                <p>User: da Pass: 1111</p>
+                <p>User: ab Pass: 2222</p>
+            </div>
+        </div>
         <input
                 type="text"
                 placeholder="USER"
@@ -69,13 +72,21 @@
 
     <!-- SUMMARY -->
     <div class="summary">
-        <p class="summary__label">In</p>
-        <p class="summary__value summary__value--in">0000€</p>
-        <p class="summary__label">Out</p>
-        <p class="summary__value summary__value--out">0000€</p>
-        <p class="summary__label">Interest</p>
-        <p class="summary__value summary__value--interest">0000€</p>
-        <button class="btn--sort">&downarrow; SORT</button>
+        <div class="summary__element">
+            <p class="summary__label">In</p>
+            <p class="summary__value summary__value--in">0000€</p>
+        </div>
+        <div class="summary__element">
+            <p class="summary__label">Out</p>
+            <p class="summary__value summary__value--out">0000€</p>
+        </div>
+        <div class="summary__element">
+            <p class="summary__label">Interest</p>
+            <p class="summary__value summary__value--interest">0000€</p>
+        </div>
+        <div class="summary__element">
+            <button class="btn--sort">&downarrow; SORT</button>
+        </div>
     </div>
 
     <!-- OPERATION: TRANSFERS -->
@@ -123,7 +134,6 @@
 </main>
 
 <footer>
-    &copy; by
 </footer>
 
 <script src="js/app.min.js"></script>
