@@ -50,6 +50,7 @@ const labelSumIn = document.querySelector('.summary__value--in');
 const labelSumOut = document.querySelector('.summary__value--out');
 const labelSumInterest = document.querySelector('.summary__value--interest');
 const labelTimer = document.querySelector('.timer');
+const labelHintData = document.querySelector('.hint__data');
 
 const containerApp = document.querySelector('.app');
 const containerMovements = document.querySelector('.movements');
@@ -59,6 +60,7 @@ const btnTransfer = document.querySelector('.form__btn--transfer');
 const btnLoan = document.querySelector('.form__btn--loan');
 const btnClose = document.querySelector('.form__btn--close');
 const btnSort = document.querySelector('.btn--sort');
+const btnHint = document.querySelector('.hint');
 
 const inputLoginUsername = document.querySelector('.login__input--user');
 const inputLoginPassword = document.querySelector('.login__input--pin');
@@ -200,6 +202,11 @@ let currentAccount,
 // updateUI(currentAccount);
 // containerApp.style.opacity = 100;
 
+btnHint.addEventListener('click', function(e){
+    e.preventDefault();
+
+    labelHintData.classList.toggle('hidden');
+})
 
 btnLogin.addEventListener('click', function (e) {
     e.preventDefault();
@@ -333,3 +340,4 @@ btnSort.addEventListener('click', function (e) {
     displayMovements(currentAccount, !sorted);
     sorted = !sorted;
 });
+

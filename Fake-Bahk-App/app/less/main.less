@@ -41,27 +41,32 @@ nav {
 
 .login {
   display: flex;
+  position: relative;
 
   .hint {
     position: relative;
     font-size: 2rem;
-    padding-right: 1rem;
-    line-height: 3rem;
-    top: .3rem;
+    padding: 0 .5rem;
+    margin-right: .5rem;
+    border: none;
+    background-color: transparent;
 
     &:hover {
-      text-decoration: underline;
       color: @red-accent;
       cursor: pointer;
     }
 
-    &--data {
+    &__data {
       position: absolute;
-      display: none;
-      top: 3.2rem;
-      left: 2rem;
+      top: 4rem;
+      left: 0;
       font-size: 1.3rem;
     }
+
+  }
+
+  .hidden {
+    display: none;
   }
 
   &__input {
